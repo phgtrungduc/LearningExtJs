@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/classic/theme-classic/resources/theme-classic-all.css"
+        rel="stylesheet" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/ext-all.js"></script>
+
+    <script type="text/javascript">
+
+        Ext.onReady(function () {
+            Ext.create('Ext.Panel', {
+                renderTo: 'helloWorldPanel',
+                height: 200,
+                width: 600,
+                title: 'Hello world',
+                html: 'First Ext JS Hello World Program'
+            });
+            Ext.define('My.own.Window', {
+                extend: 'Ext.Component',
+                /** @readonly */
+                isWindow: true,
+
+                config: {
+                    title: 'Title Here',
+
+                    bottomBar: {
+                        height: 50,
+                        resizable: false
+                    }
+                },
+
+                applyTitle: function (title) {
+                    console.log("goi den ham nay apply title");
+                    if (!Ext.isString(title) || title.length === 0) {
+                        alert('Error: Title must be a valid non-empty string');
+                    }
+                    else {
+                        return title;
+                    }
+                },
+
+                applyBottomBar: function (bottomBar) {
+                    console.log("goi den ham nay apply bottom bar");
+                    if (bottomBar) {
+                        if (!this.bottomBar) {
+                            return Ext.create('My.own.WindowBottomBar', bottomBar);
+                        }
+                        else {
+                            this.bottomBar.setConfig(bottomBar);
+                        }
+                    }
+                }
+            });
+
+            /** A child component to complete the example. */
+            Ext.define('My.own.WindowBottomBar', {
+                config: {
+                    height: undefined,
+                    resizable: true
+                }
+            });
+
+            Ext.define('My.sample.Person', {
+                extend: 'Ext.Component',
+                /** @readonly */
+                isWindow: true,
+                config: {
+                    name: 'abc',
+                },
+                eat: function (foodType) {
+                    console.log("Gọi đến hàm này");
+                    alert(this.name + " is eating: " + foodType);
+                },
+                applyName: function () {
+                    console.log("apply name");
+                }
+            });
+            var abc = Ext.create('My.sample.Person', { name: 'Bob' });
+            console.log(abc.getName());
+
+            
+        });
+    </script>
+</head>
+
+<body>
+    <div id="helloWorldPanel"></div>
+    <div id="studentsDetailsRenderDiv"></div>
+</body>
+
+</html>
