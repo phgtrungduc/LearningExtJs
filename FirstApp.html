@@ -67,20 +67,21 @@
                 /** @readonly */
                 isWindow: true,
                 config: {
-                    name: 'abc',
+                    name: '',
                 },
                 eat: function (foodType) {
                     console.log("Gọi đến hàm này");
                     alert(this.name + " is eating: " + foodType);
                 },
-                applyName: function () {
-                    console.log("apply name");
+                applyName: function (name) {
+                    this.name = name;
                 }
             });
             var abc = Ext.create('My.sample.Person', { name: 'Bob' });
+            abc.setName("bobbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
             console.log(abc.getName());
 
-            
+
         });
     </script>
 </head>
